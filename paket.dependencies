@@ -1,6 +1,10 @@
 source https://www.nuget.org/api/v2/
 framework: NET45
 
-nuget Freya 3.0.0-rc01
+nuget Freya ~> 3.0.0-rc
+nuget Freya.Polyfills.Katana ~> 3.0.0-rc
+
 nuget Freya.Hopac
+nuget Freya.Polyfills.Katana.Hopac ~> 3.0.0-rc
+
 nuget Microsoft.Owin.SelfHost
