@@ -1,0 +1,6 @@
+source https://www.nuget.org/api/v2/
+framework: NET45
+
+nuget Freya 3.0.0-rc01
+nuget Freya.Hopac
+nuget Microsoft.Owin.SelfHost

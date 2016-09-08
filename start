@@ -1,0 +1,34 @@
+#!/bin/bash -e
+
+if hash mono &> /dev/null ; then
+  RUN=mono
+  FSI=fsharpi
+  LIB=
+  for DIR in /usr/lib/mono/4.5/Facades /usr/local/Cellar/mono/*/lib/mono/4.5/Facades ; do
+    if [ -d "$DIR" ] ; then
+      LIB="--lib:$DIR"
+      break
+    fi
+  done
+else
+  RUN=
+  FSI=fsi
+  LIB=
+fi
+
+
+$RUN .paket/paket.bootstrapper.exe -s --max-file-age=60
+if [ ! -x .paket/paket.exe ] ; then
+  chmod +x .paket/paket.exe
+fi
+
+$RUN .paket/paket.exe --silent restore
+
+$FSI --quiet          \
+     --exec           \
+     --optimize+      \
+     --tailcalls+     \
+     --crossoptimize+ \
+     $LIB             \
+     "$@"             \
+     --load:app.fsx
